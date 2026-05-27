@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Үс, Хуйхны Эмчилгээ — Сургалтын Гарын Авлага</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8A96E;
+    --gold-light: #E8D5A3;
+    --gold-dark: #9A7A45;
+    --dark: #0E0E0E;
+    --dark-2: #161616;
+    --dark-3: #1E1E1E;
+    --dark-4: #2A2A2A;
+    --dark-5: #333333;
+    --text-primary: #F5F0E8;
+    --text-secondary: #B8B0A0;
+    --text-muted: #6E6860;
+    --accent-teal: #4ECDC4;
+    --accent-red: #E74C3C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 40px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(200,169,110,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-ornament {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 32px;
+    position: relative;
+  }
+
+  .cover-ornament::before, .cover-ornament::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .cover-ornament::before { left: -8px; }
+  .cover-ornament::after { right: -8px; }
+
+  .cover-badge {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+
+  .cover-title span {
+    color: var(--gold);
+  }
+
+  .cover-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 300;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: 48px;
+  }
+
+  .cover-desc {
+    max-width: 580px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .cover-bottom {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cover-stat {
+    text-align: center;
+  }
+
+  .cover-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--gold);
+    display: block;
+  }
+
+  .cover-stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .cover-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--dark-5);
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 80px 0;
+    border-top: 1px solid var(--dark-4);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--dark-5);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: -8px;
+  }
+
+  .section-title-group {
+    flex: 1;
+    padding-top: 4px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  /* INTRO GRID */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--dark-4);
+    border: 1px solid var(--dark-4);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .intro-card {
+    background: var(--dark-2);
+    padding: 32px;
+  }
+
+  .intro-card-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .intro-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  .intro-item::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  /* CAUSE CARDS */
+  .causes-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    background: var(--dark-4);
+    margin-bottom: 48px;
+  }
+
+  .cause-card {
+    background: var(--dark-2);
+    padding: 28px 20px;
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .cause-card:hover {
+    background: var(--dark-3);
+  }
+
+  .cause-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--dark-5);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .cause-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+    display: block;
+    color: var(--gold);
+  }
+
+  .cause-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .cause-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* DETAIL BLOCK */
+  .detail-block {
+    margin-bottom: 40px;
+    padding: 32px;
+    border-left: 2px solid var(--gold);
+    background: var(--dark-2);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .detail-block-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+
+  .detail-block p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 11px;
+    color: var(--gold);
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  /* TREATMENT PRINCIPLES */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--dark-4);
+    margin-bottom: 40px;
+  }
+
+  .principle-card {
+    background: var(--dark-2);
+    padding: 32px 24px;
+  }
+
+  .principle-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(200,169,110,0.15);
+    display: block;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .principle-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .principle-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* CONTRAINDICATIONS TABLE */
+  .contra-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+  }
+
+  .contra-table thead tr {
+    background: var(--dark-4);
+  }
+
+  .contra-table th {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .contra-table tbody tr {
+    border-bottom: 1px solid var(--dark-4);
+    transition: background 0.15s;
+  }
+
+  .contra-table tbody tr:hover {
+    background: var(--dark-2);
+  }
+
+  .contra-table td {
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    vertical-align: top;
+  }
+
+  .contra-table td:first-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-muted);
+    font-weight: 300;
+    width: 50px;
+    text-align: center;
+  }
+
+  .contra-table td:nth-child(2) {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 13px;
+  }
+
+  .alert-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(231,76,60,0.1);
+    color: #E74C3C;
+    border: 1px solid rgba(231,76,60,0.2);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  /* TREATMENT STEPS */
+  .steps-container {
+    position: relative;
+    padding-left: 0;
+  }
+
+  .step-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 0;
+    margin-bottom: 2px;
+    background: var(--dark-2);
+    overflow: hidden;
+  }
+
+  .step-num-col {
+    background: var(--dark-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 0;
+    position: relative;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .step-content {
+    padding: 32px;
+  }
+
+  .step-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .step-products {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .product-tag {
+    font-size: 11px;
+    background: rgba(200,169,110,0.06);
+    border: 1px solid rgba(200,169,110,0.15);
+    color: var(--gold);
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-weight: 400;
+  }
+
+  /* TREATMENT LEVELS COMPARISON */
+  .levels-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--dark-4);
+    margin-bottom: 40px;
+  }
+
+  .level-card {
+    background: var(--dark-2);
+    padding: 36px;
+  }
+
+  .level-card.featured {
+    border-top: 2px solid var(--gold);
+  }
+
+  .level-badge {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .level-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+  }
+
+  .level-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  .level-item-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  /* TIMELINE / PROGRESS */
+  .timeline {
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  .timeline-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--dark-4);
+  }
+
+  .timeline-item {
+    background: var(--dark-2);
+    padding: 36px 28px;
+    position: relative;
+  }
+
+  .timeline-session {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .timeline-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .timeline-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .timeline-items {
+    list-style: none;
+  }
+
+  .timeline-items li {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    padding-left: 12px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .timeline-items li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dark);
+  }
+
+  /* SERVICES TABLE */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--dark-4);
+    margin-bottom: 40px;
+  }
+
+  .service-card {
+    background: var(--dark-2);
+    padding: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: rgba(200,169,110,0.2);
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: -4px;
+  }
+
+  .service-content {}
+
+  .service-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .service-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* PRODUCTS SECTION */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--dark-4);
+    margin-bottom: 40px;
+  }
+
+  .product-card {
+    background: var(--dark-2);
+    padding: 32px 24px;
+  }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .product-amount {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .product-roles {
+    list-style: none;
+  }
+
+  .product-roles li {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--dark-4);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .product-roles li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* WARNING BOX */
+  .warning-box {
+    background: rgba(231,76,60,0.06);
+    border: 1px solid rgba(231,76,60,0.2);
+    border-radius: 2px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .warning-icon {
+    font-size: 18px;
+    color: #E74C3C;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .warning-text {
+    font-size: 13px;
+    color: #E74C3C;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  /* INFO BOX */
+  .info-box {
+    background: rgba(200,169,110,0.06);
+    border: 1px solid rgba(200,169,110,0.2);
+    border-radius: 2px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .info-icon {
+    font-size: 18px;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .info-text {
+    font-size: 13px;
+    color: var(--gold-light);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* RESULTS OUTCOME */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--dark-4);
+    margin-bottom: 40px;
+  }
+
+  .outcome-card {
+    background: var(--dark-2);
+    padding: 32px;
+  }
+
+  .outcome-cat {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--dark-4);
+  }
+
+  .outcome-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  .outcome-check {
+    color: var(--accent-teal);
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 0px;
+    font-weight: 600;
+  }
+
+  /* DAILY CARE SECTION */
+  .daily-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--dark-4);
+    margin-bottom: 40px;
+  }
+
+  .daily-card {
+    background: var(--dark-2);
+    padding: 36px;
+  }
+
+  .daily-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .daily-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+
+  .daily-item {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--dark-4);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .daily-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--dark-2);
+    border-top: 1px solid var(--dark-4);
+    padding: 48px 0;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--dark-5);
+    margin: 0 auto 24px;
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* MECHANISM FLOW */
+  .flow-grid {
+    display: flex;
+    gap: 2px;
+    background: var(--dark-4);
+    margin-bottom: 40px;
+  }
+
+  .flow-item {
+    flex: 1;
+    background: var(--dark-2);
+    padding: 28px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .flow-step {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .flow-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+    color: var(--gold);
+  }
+
+  .flow-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: var(--dark-5);
+    font-size: 18px;
+    background: var(--dark-3);
+    padding: 0 4px;
+  }
+
+  /* PAGE BREAK INDICATOR */
+  .section-divider {
+    height: 1px;
+    background: var(--dark-4);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .causes-grid { grid-template-columns: repeat(2, 1fr); }
+    .principles-grid { grid-template-columns: 1fr; }
+    .timeline-track { grid-template-columns: repeat(2, 1fr); }
+    .intro-grid { grid-template-columns: 1fr; }
+    .levels-grid { grid-template-columns: 1fr; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .daily-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .flow-grid { flex-direction: column; }
+  }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .cover { min-height: auto; padding: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ COVER ═══ -->
+<div class="cover">
+  <div class="cover-badge">AI Academy · Мэргэжлийн Сургалт</div>
+  <div class="cover-ornament"></div>
+  <h1 class="cover-title">Үс, <span>Хуйхны</span><br>Эмчилгээ</h1>
+  <p class="cover-subtitle">Сургалтын Гарын Авлага</p>
+  <p class="cover-desc">
+    Үсний уналт, шингэрэлт, халцралтын шинжлэх ухааны үндэслэл болон мэргэжлийн эмчилгээний дэлгэрэнгүй арга зүй.
+  </p>
+  <div class="cover-bottom">
+    <div class="cover-stat">
+      <span class="cover-stat-num">100+</span>
+      <span class="cover-stat-label">Өвсөн ургамал</span>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-stat">
+      <span class="cover-stat-num">5</span>
+      <span class="cover-stat-label">Эмчилгээний шат</span>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-stat">
+      <span class="cover-stat-num">10</span>
+      <span class="cover-stat-label">Үндсэн үйлчилгээ</span>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-stat">
+      <span class="cover-stat-num">20–30</span>
+      <span class="cover-stat-label">Минут нэг цикл</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ SECTION I ═══ -->
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">00</div>
+      <div class="section-title-group">
+        <div class="section-label">Танилцуулга</div>
+        <h2 class="section-title">Үс яагаад унадаг, шингэрдэг, халцардаг вэ?</h2>
+      </div>
+    </div>
+
+    <div class="intro-grid">
+      <div class="intro-card">
+        <div class="intro-card-title">Үсний асуудлын гол шалтгаан</div>
+        <div class="intro-item">Тархины цусан хангамж муудах</div>
+        <div class="intro-item">Стресс ба мэдрэлийн ядаргаа</div>
+        <div class="intro-item">Шим тэжээлийн дутагдал</div>
+        <div class="intro-item">Хуйхны бөглөрөл ба бохирдол</div>
+        <div class="intro-item">Дааврын өөрчлөлт</div>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-title">Эмчилгээний үндсэн зарчим</div>
+        <div class="intro-item">Цусан хангамжийг дэмжих</div>
+        <div class="intro-item">Хуйхны бөглөрлийг цэвэрлэх</div>
+        <div class="intro-item">Үсний булцууг сэргээх</div>
+        <div class="intro-item">Шим тэжээл өгөх</div>
+        <div class="intro-item">Мэдрэлийн системийг тайвшруулах</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-icon">✦</div>
+      <div class="info-text">
+        Хүний үс нь зөвхөн гаднах гоо сайхны асуудал биш — тархины цусан хангамж, дааврын тэнцвэр, шим тэжээл, мэдрэлийн систем, хуйхны эрүүл байдал зэрэг олон хүчин зүйлтэй шууд холбоотой байдаг.
+        100 гаруй төрлийн өвсөн ургамлын өндөр антиоксидант найрлага нь арьсанд хурдан нэвчин, эсийн сэргэлтийг дэмжиж, бохирдлыг гадагшлуулахад тусалдаг.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION I: CAUSES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">I</div>
+      <div class="section-title-group">
+        <div class="section-label">Нэгдүгээр хэсэг</div>
+        <h2 class="section-title">Үс унах үндсэн шалтгаанууд</h2>
+      </div>
+    </div>
+
+    <div class="causes-grid">
+      <div class="cause-card">
+        <span class="cause-num">01</span>
+        <span class="cause-icon">🫀</span>
+        <div class="cause-title">Тархины цусан хангамж муудах</div>
+        <div class="cause-desc">Үсний уг хангалттай хүчилтөрөгч авч чаддаггүй</div>
+      </div>
+      <div class="cause-card">
+        <span class="cause-num">02</span>
+        <span class="cause-icon">🧠</span>
+        <div class="cause-title">Стресс ба мэдрэлийн ядаргаа</div>
+        <div class="cause-desc">Судас агшиж дааврын тэнцвэрт өөрчлөлт орно</div>
+      </div>
+      <div class="cause-card">
+        <span class="cause-num">03</span>
+        <span class="cause-icon">🌿</span>
+        <div class="cause-title">Шим тэжээлийн дутагдал</div>
+        <div class="cause-desc">Уураг, төмөр, цайр, витамин дутагдсан үед</div>
+      </div>
+      <div class="cause-card">
+        <span class="cause-num">04</span>
+        <span class="cause-icon">🔒</span>
+        <div class="cause-title">Хуйхны бөглөрөл ба бохирдол</div>
+        <div class="cause-desc">Тослог, үхэжсэн эс, химийн үлдэгдэл хуримтлагдана</div>
+      </div>
+      <div class="cause-card">
+        <span class="cause-num">05</span>
+        <span class="cause-icon">⚖️</span>
+        <div class="cause-title">Дааврын өөрчлөлт</div>
+        <div class="cause-desc">Тэнцвэр алдагдвал үс нимгэрч халзрана</div>
+      </div>
+    </div>
+
+    <!-- Detail blocks -->
+    <div class="detail-block">
+      <div class="detail-block-title">01 · Тархины цусан хангамж муудах</div>
+      <p>Толгой хэсгийн судасны цусны эргэлт муудахад үсний уг хангалттай хүчилтөрөгч авч чаддаггүй, шим тэжээл хангалттай очихгүй болдог бөгөөд үсний булцуу аажмаар сулардаг.</p>
+      <div class="tag-list">
+        <span class="tag">Үс шингэрэх</span>
+        <span class="tag">Ургалт удаашрах</span>
+        <span class="tag">Халцрах</span>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <div class="detail-block-title">02 · Стресс ба мэдрэлийн ядаргаа</div>
+      <p>Удаан хугацааны стресс нь судас агшааж, тархины цусны эргэлтийг бууруулахаас гадна дааврын тэнцвэрт өөрчлөлт оруулдаг.</p>
+      <div class="tag-list">
+        <span class="tag">Үс унах</span>
+        <span class="tag">Тослог ихсэх</span>
+        <span class="tag">Хуйх эмзэгших</span>
+        <span class="tag">Нойр муудах</span>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <div class="detail-block-title">03 · Шим тэжээлийн дутагдал</div>
+      <p>Үсний уг булцуу нь уураг, төмөр, цайр, витамин, амин хүчил дутагдсан үед сулран, үс уналт нэмэгддэг. Шим тэжээлгүй хуйх нь удаан услаагүй хатсан хөрстэй адил болдог.</p>
+      <div class="tag-list">
+        <span class="tag">Хуурайшиж хатдаг</span>
+        <span class="tag">Нэвчилт муутай болдог</span>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <div class="detail-block-title">04 · Хуйхны бөглөрөл ба бохирдол</div>
+      <p>Хуйханд тослог, үхэжсэн эс, химийн үлдэгдэл болон бохирдол удаан хуримтлагдвал үсний нүх бөглөрч, ургалт саарна.</p>
+      <div class="tag-list">
+        <span class="tag">Үс ургалт саарна</span>
+        <span class="tag">Үсний үндэс амьсгалж чадахгүй</span>
+        <span class="tag">Халцарч эхэлдэг</span>
+      </div>
+    </div>
+
+    <div class="detail-block">
+      <div class="detail-block-title">05 · Дааврын өөрчлөлт</div>
+      <p>Дааврын тэнцвэр алдагдсанаар үс нимгэрэх, халзрах, тослог ихсэх зэрэг асуудал гардаг.</p>
+      <div class="tag-list">
+        <span class="tag">Төрсний дараах үе</span>
+        <span class="tag">Нойргүйдэл</span>
+        <span class="tag">Архаг стресс</span>
+        <span class="tag">Насжилт</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION II: TREATMENT PRINCIPLES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">II</div>
+      <div class="section-title-group">
+        <div class="section-label">Хоёрдугаар хэсэг</div>
+        <h2 class="section-title">Эмчилгээний үйлчилгээний зарчим</h2>
+      </div>
+    </div>
+
+    <!-- Mechanism flow -->
+    <div class="flow-grid">
+      <div class="flow-item">
+        <div class="flow-step">Шат 1</div>
+        <span class="flow-icon">🔓</span>
+        <div class="flow-label">Цусны эргэлтийг нээх</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-step">Шат 2</div>
+        <span class="flow-icon">🧹</span>
+        <div class="flow-label">Хуйхны бөглөрлийг цэвэрлэх</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-step">Шат 3</div>
+        <span class="flow-icon">🌱</span>
+        <div class="flow-label">Шим тэжээл өгөх</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-step">Шат 4</div>
+        <span class="flow-icon">💫</span>
+        <div class="flow-label">Булцуу сэргээх</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <div class="flow-step">Шат 5</div>
+        <span class="flow-icon">✨</span>
+        <div class="flow-label">Нөхөн төлжүүлэх</div>
+      </div>
+    </div>
+
+    <div class="principles-grid">
+      <div class="principle-card">
+        <span class="principle-num">1</span>
+        <div class="principle-title">Тархины цусан хангамжийг сайжруулна</div>
+        <div class="principle-desc">Толгой хэсгийн судасны цусны эргэлт сайжирснаар үсний уг шим тэжээлээ сайн авч, тархи амарч, хүчилтөрөгчийн солилцоо нэмэгдэнэ.</div>
+      </div>
+      <div class="principle-card">
+        <span class="principle-num">2</span>
+        <div class="principle-title">Үсний ургалтыг дэмжинэ</div>
+        <div class="principle-desc">Үсний булцуу шим тэжээл авч эхэлснээр ургалт идэвхжиж, сул үс бэхжиж, нимгэн үс өтгөрөхөд дэмжлэг үзүүлнэ.</div>
+      </div>
+      <div class="principle-card">
+        <span class="principle-num">3</span>
+        <div class="principle-title">Үсгүй хэсгийн сэргэлтийг дэмжинэ</div>
+        <div class="principle-desc">Хуйхны бөглөрөл цэвэрлэгдэж, цусны эргэлт нэмэгдсэнээр унтаа булцуу идэвхжих боломж бүрдэнэ.</div>
+      </div>
+      <div class="principle-card">
+        <span class="principle-num">4</span>
+        <div class="principle-title">Хуйхны хор бохирдлыг гадагшлуулна</div>
+        <div class="principle-desc">Халуун тосны үйлчилгээ нь бөглөрсөн тослог, бохирдол, үлдэгдлийг гадагшлуулахад тусалдаг.</div>
+      </div>
+      <div class="principle-card">
+        <span class="principle-num">5</span>
+        <div class="principle-title">Нүдний ядаргаа болон харааг дэмждэг</div>
+        <div class="principle-desc">Толгой орчмын судасны эргэлт болон мэдрэлийн тайвшрал сайжирснаар нүдний ядрал багасаж, харааг дэмжинэ.</div>
+      </div>
+      <div class="principle-card">
+        <span class="principle-num">6</span>
+        <div class="principle-title">Стресс ба нойрыг сайжруулна</div>
+        <div class="principle-desc">Эмчилгээний дараа тархи амарч, мэдрэл тайвширч, нойр гүнзгийрэх, ядрал буурах мэдрэмж төрдэг.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION III: PROCEDURE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">III</div>
+      <div class="section-title-group">
+        <div class="section-label">Гуравдугаар хэсэг</div>
+        <h2 class="section-title">Эмчилгээ хийх дараалал</h2>
+      </div>
+    </div>
+
+    <!-- Treatment Level Comparison -->
+    <div class="levels-grid">
+      <div class="level-card">
+        <div class="level-badge">Эмчилгээний түвшин</div>
+        <div class="level-name">Хөнгөн эмчилгээ</div>
+        <div class="level-item"><div class="level-item-dot"></div>1/2 сав уураг тэжээл</div>
+        <div class="level-item"><div class="level-item-dot"></div>10 мл халуун тос</div>
+        <div class="level-item"><div class="level-item-dot"></div>Алтан маск 10 мл</div>
+        <div class="level-item"><div class="level-item-dot"></div>Мист — эхлэл болон төгсгөлд</div>
+        <div class="level-item"><div class="level-item-dot"></div>Үсийг хусахгүй байж болно</div>
+      </div>
+      <div class="level-card featured">
+        <div class="level-badge">Эмчилгээний түвшин</div>
+        <div class="level-name">Гүний эмчилгээ</div>
+        <div class="level-item"><div class="level-item-dot"></div>Уураг тэжээл 1–2 сав (асуудлаас хамаарч)</div>
+        <div class="level-item"><div class="level-item-dot"></div>2 ширхэг халуун тос</div>
+        <div class="level-item"><div class="level-item-dot"></div>Алтан маск 20 мл</div>
+        <div class="level-item"><div class="level-item-dot"></div>Мист — эхлэл болон төгсгөлд</div>
+        <div class="level-item"><div class="level-item-dot"></div>Үсийг хусах нь үр дүнг нэмэгдүүлнэ</div>
+      </div>
+    </div>
+
+    <!-- Contraindications -->
+    <div style="margin-bottom: 32px;">
+      <div class="section-label" style="margin-bottom: 16px;">1-р шат — Асуумж авах · Эмчилгээ хийхгүй нөхцөлүүд</div>
+      <table class="contra-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Нөхцөл байдал</th>
+            <th>Тайлбар</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Хүнд өвчтэй хүн</td>
+            <td>Биеийн ерөнхий байдал хүнд үед эмчилгээ хийхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Жирэмсэн хүн</td>
+            <td>Жирэмсэн үед хэрэглэхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Тархины цус харвалт</td>
+            <td>Тархины судасны асуудалтай хүмүүст хийхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Саажилт болон мэдээгүйжилт</td>
+            <td>Мэдээгүйжилттэй үед хийхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Цусны даралт 160+</td>
+            <td>Цусны даралт 160 болон түүнээс дээш үед хэрэглэхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Төмөр суулгац</td>
+            <td>Толгой, биед суулгацтай хүмүүст хийхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Архи хэрэглэсэн үед</td>
+            <td>Согтуу болон архи хэрэглэсэн үед эмчилгээ хийхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Биеийн хордлого</td>
+            <td>Цусан дахь хор, хордлого өндөр үед хэрэглэхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Төрсний дараа (1 сар)</td>
+            <td>Төрсний дараах эхний 1 сарын хугацаанд хийхгүй</td>
+            <td><span class="alert-badge">Хориотой</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Steps -->
+    <div class="section-label" style="margin-bottom: 16px;">Эмчилгээний шат дараалал</div>
+
+    <div class="steps-container">
+      <div class="step-item">
+        <div class="step-num-col">
+          <div class="step-num">2</div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Хоёрдугаар шат</div>
+          <div class="step-title">Хөнгөн болон гүний эмчилгээ сонгох</div>
+          <p class="step-desc">Асуудлын түвшнийг үнэлж тохирох эмчилгээний хэлбэрийг сонгоно. Үсийг хусаж эмчилгээ эхлүүлэх нь үр дүнг илүү сайжруулна.</p>
+          <div class="step-products">
+            <span class="product-tag">Хөнгөн эмчилгээ</span>
+            <span class="product-tag">Гүний эмчилгээ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num-col">
+          <div class="step-num">3</div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Гуравдугаар шат</div>
+          <div class="step-title">Мист цацах + Уураг тэжээл түрхэх</div>
+          <p class="step-desc">Уураг тэжээлийг удаан, массажилж, шингээн түрхэнэ. Энэ үед хуйх чийгшиж, шингээлт сайжирдаг.</p>
+          <div class="step-products">
+            <span class="product-tag">Мист</span>
+            <span class="product-tag">Уураг тэжээл</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num-col">
+          <div class="step-num">4</div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Дөрөвдүгээр шат</div>
+          <div class="step-title">Халуун тос хэрэглэх</div>
+          <p class="step-desc">Халуун тос нь бохирдлыг суллаж, бөглөрлийг гаргаж, гадагшлуулахад тусалдаг.</p>
+          <div class="warning-box" style="margin-bottom:0; margin-top:12px; padding:16px 20px;">
+            <div class="warning-icon">⚠</div>
+            <div class="warning-text" style="font-size:12px;">Хэт халалт мэдрэгдвэл шууд арчиж зогсооно.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num-col">
+          <div class="step-num">5</div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Тавдугаар шат</div>
+          <div class="step-title">Алтан маск — 20 минут</div>
+          <p class="step-desc">Алтан маск нь үлдэгдэл бохирдлыг татаж авч, хамгаалалтын давхарга үүсгэж, нөхөн төлжилтийг дэмжиж, хуйхыг тайвшруулдаг.</p>
+          <div class="step-products">
+            <span class="product-tag">Алтан маск</span>
+            <span class="product-tag">20 минут</span>
+            <span class="product-tag">Мист</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top: 32px;">
+      <div class="info-icon">⏱</div>
+      <div class="info-text">
+        <strong style="color: var(--gold);">Нийт үргэлжлэх хугацаа: 20–30 минут.</strong> 
+        Эмчилгээний зааврыг мөрдөж хийх. 5 өдөр нь 1 цикл байна.
+      </div>
+    </div>
+
+    <!-- Golden mask explanation -->
+    <div class="detail-block" style="margin-top: 24px;">
+      <div class="detail-block-title">Алтан маскыг яагаад хамгийн сүүлд тавьдаг вэ?</div>
+      <p>Халуун тосны дараа хуйх мэдрэмтгий болж, бөглөрөл суларч, бохирдол гадаргуурт гарч ирсэн байдаг. Энэ үед Алтан маск нь үлдэгдэл бохирдлыг татаж авч, хуйхыг тайвшруулж, хамгаалалтын давхарга үүсгэж, дахин бохирдол хуримтлагдахаас хамгааладаг.</p>
+      <div class="tag-list">
+        <span class="tag">Үлдэгдэл бохирдлыг татна</span>
+        <span class="tag">Хамгаалалтын давхарга</span>
+        <span class="tag">Нөхөн төлжилт</span>
+        <span class="tag">Хуйхыг тайвшруулна</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION IV: AFTER EFFECTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">IV</div>
+      <div class="section-title-group">
+        <div class="section-label">Дөрөвдүгээр хэсэг</div>
+        <h2 class="section-title">Эмчилгээний дараа ажиглагдах өөрчлөлт</h2>
+      </div>
+    </div>
+
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-cat">Тархи ба биед</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Толгой хөнгөрөх</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Нойр сайжрах</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Стресс буурах</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Нүдний ядрал багасах</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Хүзүү, мөр суларч тайвшрах</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Тархи амарсан мэдрэмж</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-cat">Үс ба гадаад байдал</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Үс зөөлрөх</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Үс уналт багасах</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Үсний ургалт идэвхжих</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Шингэрсэн хэсэг сэргэх</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Нүүр гэрэлтэх</div>
+        <div class="outcome-item"><span class="outcome-check">✓</span> Арьс чийгших, толигор болох</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION V: TIMELINE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">V</div>
+      <div class="section-title-group">
+        <div class="section-label">Тавдугаар хэсэг</div>
+        <h2 class="section-title">Эмчилгээний үр дүн — Шат дараалсан өөрчлөлт</h2>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-icon">✦</div>
+      <div class="info-text">
+        Эмчилгээний үр дүн нь хуйхны бөглөрөл, тархины цусан хангамж, үсний булцууны идэвх, стрессийн түвшин, шим тэжээлийн дутагдалаас шалтгаалан хүн бүрт өөр өөр хугацаанд илэрдэг.
+      </div>
+    </div>
+
+    <div class="timeline-track">
+      <div class="timeline-item">
+        <div class="timeline-session">Удаагийн дараа</div>
+        <span class="timeline-num">1</span>
+        <div class="timeline-title">Мэдрэлийн системтэй холбоотой өөрчлөлт</div>
+        <ul class="timeline-items">
+          <li>Толгой хөнгөрөх</li>
+          <li>Тархины даралт багасах мэт мэдрэмж</li>
+          <li>Нойр сайжрах</li>
+          <li>Стресс буурах</li>
+          <li>Нүдний ядаргаа багасах</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-session">Удаагийн дараа</div>
+        <span class="timeline-num">5</span>
+        <div class="timeline-title">Үсний булцуу тэжээгдэж эхэлнэ</div>
+        <ul class="timeline-items">
+          <li>Үс уналт багасах</li>
+          <li>Үс зөөлрөх</li>
+          <li>Хуйхны тослог тэнцвэржих</li>
+          <li>Шинэ жижиг үс ургаж эхлэх</li>
+          <li>Шингэрсэн хэсэг сэргэж эхлэх</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-session">Удаагийн дараа</div>
+        <span class="timeline-num">15</span>
+        <div class="timeline-title">Унтаа булцуунууд сэргэж эхэлнэ</div>
+        <ul class="timeline-items">
+          <li>Шингэрсэн хэсэг өтгөрөх</li>
+          <li>Ургалт мэдэгдэхүйц нэмэгдэх</li>
+          <li>Үсний ширхэг бүдүүрэх</li>
+          <li>Халцарсан хэсэгт ургалт нэмэгдэх</li>
+          <li>Үсний эрүүл байдал сайжрах</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-session">Удаагийн дараа</div>
+        <span class="timeline-num">20</span>
+        <div class="timeline-title">Нүдэнд харагдах өөрчлөлтүүд</div>
+        <ul class="timeline-items">
+          <li>Бүрэн халцарсан хэсэгт ургалт</li>
+          <li>Үсний нягтрал нэмэгдэх</li>
+          <li>Халцралт зогсох</li>
+          <li>Хуйх эрүүлжих</li>
+          <li>Үс илүү өтгөн, эрүүл болох</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION VI: 10 SERVICES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">VI</div>
+      <div class="section-title-group">
+        <div class="section-label">Зургадугаар хэсэг</div>
+        <h2 class="section-title">Эмчилгээний үндсэн 10 үйлчилгээ</h2>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-content">
+          <div class="service-name">Тархины цусан хангамж</div>
+          <div class="service-desc">Тархины хүчилтөрөгч, шим тэжээлийн эргэлтийг дэмжинэ.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-content">
+          <div class="service-name">Стресс, ядаргааг бууруулна</div>
+          <div class="service-desc">Тархийг тайвшруулж, амраана.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-content">
+          <div class="service-name">Эсийн сэргэлтийг дэмжинэ</div>
+          <div class="service-desc">Тархины эд эсийн нөхөн төлжилтөд дэмжлэг үзүүлнэ.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-content">
+          <div class="service-name">Толгой өвдөлтийг намжаана</div>
+          <div class="service-desc">Толгойн хүнд, оргих, чилэх мэдрэмжийг багасгана.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-content">
+          <div class="service-name">Үсний булцуу тэжээгдэнэ</div>
+          <div class="service-desc">Үсний ургалт, бат бөх байдлыг дэмжинэ.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <div class="service-content">
+          <div class="service-name">Анхаарал төвлөрөл сайжирна</div>
+          <div class="service-desc">Бодол санаа төвлөрөхөд тусална.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">07</div>
+        <div class="service-content">
+          <div class="service-name">Судасны эргэлт сайжирна</div>
+          <div class="service-desc">Тархины судасны агшилт, нарийслыг дэмжинэ.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">08</div>
+        <div class="service-content">
+          <div class="service-name">Урьдчилан сэргийлэх үйлчилгээ</div>
+          <div class="service-desc">Тархины судасны эрүүл байдлыг урт хугацаанд дэмжинэ.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">09</div>
+        <div class="service-content">
+          <div class="service-name">Нүүрний арьсыг чийгшүүлнэ</div>
+          <div class="service-desc">Арьсыг толигор, гэрэлтсэн харагдуулна.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">10</div>
+        <div class="service-content">
+          <div class="service-name">Мэдрэлийн систем тайвшрана</div>
+          <div class="service-desc">Биеийн ерөнхий тайвшралд нөлөөлнө.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION VII: PRODUCTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">VII</div>
+      <div class="section-title-group">
+        <div class="section-label">Долдугаар хэсэг</div>
+        <h2 class="section-title">Эмчилгээний бүтээгдэхүүний харьцаа</h2>
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-name">Уураг тэжээл</div>
+        <div class="product-amount">1 сав · Хөнгөн / 1–2 сав · Гүний</div>
+        <ul class="product-roles">
+          <li>Шим тэжээл өгөх</li>
+          <li>Хуйх чийгшүүлэх</li>
+          <li>Нэвчилтийг нэмэгдүүлэх</li>
+          <li>Булцууг тэжээх</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Халуун тос (Кан маск)</div>
+        <div class="product-amount">0.5 сав</div>
+        <ul class="product-roles">
+          <li>Бөглөрөл суллах</li>
+          <li>Бохирдол гадагшлуулах</li>
+          <li>Судасны эргэлт идэвхжүүлэх</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Алтан маск</div>
+        <div class="product-amount">0.5 сав</div>
+        <ul class="product-roles">
+          <li>Үлдэгдэл бохирдлыг татах</li>
+          <li>Хамгаалалтын давхарга үүсгэх</li>
+          <li>Нөхөн төлжилтийг дэмжих</li>
+          <li>Хуйх тайвшруулах</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION VIII: DAILY CARE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">VIII</div>
+      <div class="section-title-group">
+        <div class="section-label">Наймдугаар хэсэг</div>
+        <h2 class="section-title">Эмчилгээний явцад заавал хийгдэх зүйлс</h2>
+      </div>
+    </div>
+
+    <div class="daily-grid">
+      <div class="daily-card">
+        <span class="daily-icon">🫗</span>
+        <div class="daily-title">Халуун бүлээн ус уух</div>
+        <div class="daily-item">Эмчилгээ хийх өмнө болон явцдаа халуун бүлээн ус уух</div>
+        <div class="daily-item">Ус уух нь цусны эргэлтийг дэмжиж, бодисын солилцоог идэвхжүүлдэг</div>
+        <div class="daily-item">Хүйтэн ус, кофе, цай зэргийг эмчилгээний үеэр хэрэглэхгүй байх</div>
+      </div>
+      <div class="daily-card">
+        <span class="daily-icon">🦶</span>
+        <div class="daily-title">Орой бүрийн хөл дүрэх журам</div>
+        <div class="daily-item">Орой бүр 15–20 минут хөлөө дүрнэ</div>
+        <div class="daily-item">Усны хэм 40°C-аас хэтрэхгүй байх (арьс шатаах аюулгүй)</div>
+        <div class="daily-item">Дүрэхийн өмнө усны хэмийг гарын тусламжтайгаар шалгаарай</div>
+        <div class="daily-item">Хэт халуун ус нь хялгасан судасны гэмтэл үүсгэж болно</div>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">⚠</div>
+      <div class="warning-text">
+        Усны хэм 40°C-аас хэтэрвэл хялгасан судасны гэмтэл үүсгэж болно. Эмчилгээний өмнө заавал хэмийг шалгана уу.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">AI ACADEMY</div>
+  <div class="footer-sub">Мэргэжлийн Сургалтын Материал</div>
+  <div class="footer-divider"></div>
+  <div class="footer-note">
+    Энэхүү сургалтын гарын авлага нь мэргэжлийн эмч нарын хэрэглээнд зориулагдсан бөгөөд зөвхөн боловсролын зорилгоор ашиглагдана.
+  </div>
+</div>
+
+</body>
+</html>
