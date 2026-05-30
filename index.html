@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Academy — Сургалтын Материалууд</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8A96E;
+    --gold-light: #E8D5A3;
+    --gold-dark: #9A7A45;
+    --dark: #0E0E0E;
+    --dark-2: #161616;
+    --dark-3: #1E1E1E;
+    --dark-4: #2A2A2A;
+    --dark-5: #383838;
+    --text-primary: #F5F0E8;
+    --text-secondary: #B8B0A0;
+    --text-muted: #6E6860;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid var(--dark-4);
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    position: sticky;
+    top: 0;
+    background: rgba(14,14,14,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-mark::before {
+    content: 'AI';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .logo-text span {
+    color: var(--gold);
+  }
+
+  .header-meta {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 100px 60px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 60px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+  }
+
+  .hero-title em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .hero-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 480px;
+  }
+
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-end;
+  }
+
+  .stat {
+    text-align: right;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--dark-5);
+    align-self: center;
+    margin-right: 0;
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 8px;
+  }
+
+  .filter-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--dark-5);
+    padding: 6px 16px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .filter-btn:hover {
+    color: var(--text-secondary);
+    border-color: var(--dark-5);
+    background: var(--dark-3);
+  }
+
+  .filter-btn.active {
+    color: var(--gold);
+    border-color: rgba(200,169,110,0.4);
+    background: rgba(200,169,110,0.06);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    max-width: 1200px;
+    margin: 0 auto 48px;
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--dark-4);
+  }
+
+  .divider-text {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px 120px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--dark-4);
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--dark-2);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    background: var(--dark-3);
+  }
+
+  .card:hover .card-arrow {
+    transform: translate(3px, -3px);
+    color: var(--gold);
+  }
+
+  .card:hover .card-num {
+    color: rgba(200,169,110,0.12);
+  }
+
+  .card-top {
+    padding: 32px 28px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: rgba(200,169,110,0.07);
+    line-height: 1;
+    transition: color 0.2s;
+    user-select: none;
+  }
+
+  .card-arrow {
+    font-size: 18px;
+    color: var(--dark-5);
+    transition: all 0.25s;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .card-category {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin-bottom: 12px;
+    flex: 1;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .card-bottom {
+    padding: 16px 28px 24px;
+    border-top: 1px solid var(--dark-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .card-tag {
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--dark-4);
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  .card-duration {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 300;
+    white-space: nowrap;
+    margin-left: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Featured card */
+  .card.featured {
+    border-top: 2px solid var(--gold);
+  }
+
+  .card.featured .card-title {
+    color: var(--text-primary);
+  }
+
+  .featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+
+  /* Coming soon */
+  .card.coming-soon {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .coming-badge {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--dark-4);
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    width: fit-content;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--dark-4);
+    padding: 48px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 4px;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .footer-line {
+    font-size: 11px;
+    color: var(--dark-5);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    header { padding: 0 24px; }
+    .hero { padding: 60px 24px 48px; grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: row; align-items: center; justify-content: flex-start; }
+    .filter-bar { padding: 0 24px 36px; }
+    .section-divider { padding: 0 24px; }
+    .grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px 80px; }
+    footer { padding: 36px 24px; }
+  }
+
+  @media (max-width: 580px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 36px; }
+    .hero-stats { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-mark"></div>
+    <div class="logo-text">AI <span>Academy</span></div>
+  </a>
+  <div class="header-meta">Сургалтын Материалууд</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Мэргэжлийн Сургалт</div>
+    <h1 class="hero-title">Мэргэжлийн<br><em>Эмчилгээний</em><br>Гарын Авлага</h1>
+    <p class="hero-desc">Гоо сайхан, эрүүл мэндийн чиглэлийн мэргэжилтнүүдэд зориулсан дэлгэрэнгүй сургалтын материалууд. Шинжлэх ухааны үндэслэлтэй, дадлагад суурилсан.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">10</span>
+      <span class="stat-label">Сургалт</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">5+</span>
+      <span class="stat-label">Чиглэл</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Хандалт</span>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">Шүүлт</span>
+  <button class="filter-btn active" onclick="filterCards('all', this)">Бүгд</button>
+  <button class="filter-btn" onclick="filterCards('hair', this)">Үс &amp; Хуйх</button>
+  <button class="filter-btn" onclick="filterCards('skin', this)">Арьс</button>
+  <button class="filter-btn" onclick="filterCards('body', this)">Биеийн эмчилгээ</button>
+  <button class="filter-btn" onclick="filterCards('wellness', this)">Эрүүл мэнд</button>
+</div>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="divider-line"></div>
+  <div class="divider-text">Сургалтын материалууд</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="cardGrid">
+
+  <!-- 01 — FEATURED -->
+  <a class="card featured" href="hair-treatment.html" data-category="hair">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">01</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="featured-badge">✦ Нийтлэгдсэн</div>
+      <div class="card-category">Үс &amp; Хуйх</div>
+      <div class="card-title">Үс, Хуйхны Эмчилгээ</div>
+      <div class="card-desc">Үсний уналт, шингэрэлт, халцралтын шалтгаан болон мэргэжлийн эмчилгээний дэлгэрэнгүй заавар.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Цусан хангамж</span>
+        <span class="card-tag">Булцуу</span>
+        <span class="card-tag">Маск</span>
+      </div>
+      <span class="card-duration">20–30 мин</span>
+    </div>
+  </a>
+
+  <!-- 02 -->
+  <a class="card" href="detox-treatment.html" data-category="body">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">02</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="featured-badge">✦ Нийтлэгдсэн</div>
+      <div class="card-category">Биеийн эмчилгээ</div>
+      <div class="card-title">Бүтэн Биеийн Гүний Цэвэрлэгээний Эмчилгээ</div>
+      <div class="card-desc">Биеийн хор бохирдлыг үе шаттай гадагшлуулах 5 өдрийн мэргэжлийн детокс хөтөлбөр.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Детокс</span>
+        <span class="card-tag">Лимф</span>
+        <span class="card-tag">5 өдөр</span>
+      </div>
+      <span class="card-duration">20–30 мин</span>
+    </div>
+  </a>
+
+  <!-- 03 -->
+  <a class="card coming-soon" href="#" data-category="body">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">03</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="coming-badge">Тун удахгүй</div>
+      <div class="card-category">Биеийн эмчилгээ</div>
+      <div class="card-title">Толгойн Массажны Техник</div>
+      <div class="card-desc">Тархины цусан хангамжийг дэмжих массажны зөв техник болон дарах цэгүүд.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Акупрессур</span>
+        <span class="card-tag">Техник</span>
+      </div>
+      <span class="card-duration">—</span>
+    </div>
+  </a>
+
+  <!-- 04 -->
+  <a class="card coming-soon" href="#" data-category="body">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">04</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="coming-badge">Тун удахгүй</div>
+      <div class="card-category">Биеийн эмчилгээ</div>
+      <div class="card-title">Нурууны Эмчилгээ</div>
+      <div class="card-desc">Нурууны өвдөлт, хурцадмал байдлыг намжааж, мэдрэлийн системийг тайвшруулах арга.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Нуруу</span>
+        <span class="card-tag">Мэдрэл</span>
+      </div>
+      <span class="card-duration">—</span>
+    </div>
+  </a>
+
+  <!-- 05 -->
+  <a class="card coming-soon" href="#" data-category="skin">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">05</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="coming-badge">Тун удахгүй</div>
+      <div class="card-category">Арьс</div>
+      <div class="card-title">Биеийн Арьсны Арчилгаа</div>
+      <div class="card-desc">Биеийн арьсыг чийгшүүлж, тэжээж, эрүүлжүүлэх мэргэжлийн арга техник.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Чийглэлт</span>
+        <span class="card-tag">Тэжээл</span>
+      </div>
+      <span class="card-duration">—</span>
+    </div>
+  </a>
+
+  <!-- 06 -->
+  <a class="card coming-soon" href="#" data-category="wellness">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">06</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="coming-badge">Тун удахгүй</div>
+      <div class="card-category">Эрүүл мэнд</div>
+      <div class="card-title">Хөл, Гарын Рефлексологи</div>
+      <div class="card-desc">Хөл болон гарын рефлекс цэгүүдэд нөлөөлж биеийн дотоод эрхтний эрүүл байдлыг дэмжих.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Рефлекс</span>
+        <span class="card-tag">Дотоод эрхтэн</span>
+      </div>
+      <span class="card-duration">—</span>
+    </div>
+  </a>
+
+  <!-- 07 -->
+  <a class="card coming-soon" href="#" data-category="hair">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">07</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="coming-badge">Тун удахгүй</div>
+      <div class="card-category">Үс &amp; Хуйх</div>
+      <div class="card-title">Хуйхны Хяналт ба Оношлогоо</div>
+      <div class="card-desc">Хуйхны төлөв байдлыг үнэлж, зөв эмчилгээний хэлбэрийг сонгох мэргэжлийн аргачлал.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Оношлогоо</span>
+        <span class="card-tag">Үнэлгээ</span>
+      </div>
+      <span class="card-duration">—</span>
+    </div>
+  </a>
+
+  <!-- 08 -->
+  <a class="card coming-soon" href="#" data-category="wellness">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">08</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="coming-badge">Тун удахгүй</div>
+      <div class="card-category">Эрүүл мэнд</div>
+      <div class="card-title">Стресс Менежмент ба Нойр</div>
+      <div class="card-desc">Стрессийн биед үзүүлэх нөлөө болон мэргэжлийн эмчилгээгээр нойрыг сайжруулах арга.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Стресс</span>
+        <span class="card-tag">Нойр</span>
+      </div>
+      <span class="card-duration">—</span>
+    </div>
+  </a>
+
+  <!-- 09 -->
+  <a class="card coming-soon" href="#" data-category="skin">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">09</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="coming-badge">Тун удахгүй</div>
+      <div class="card-category">Арьс</div>
+      <div class="card-title">Нүдний Орчмын Арчилгаа</div>
+      <div class="card-desc">Нүдний орчмын нимгэн арьсыг арчлах, хавдар, харлалтыг багасгах мэргэжлийн техник.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Нүдний орчим</span>
+        <span class="card-tag">Тэжээл</span>
+      </div>
+      <span class="card-duration">—</span>
+    </div>
+  </a>
+
+  <!-- 10 -->
+  <a class="card coming-soon" href="#" data-category="body">
+    <div class="card-top">
+      <div class="card-header">
+        <span class="card-num">10</span>
+        <span class="card-arrow">↗</span>
+      </div>
+      <div class="coming-badge">Тун удахгүй</div>
+      <div class="card-category">Биеийн эмчилгээ</div>
+      <div class="card-title">Мөрний Хурцадмал Байдлын Эмчилгээ</div>
+      <div class="card-desc">Мөр, хүзүүний булчингийн хурцадмал байдлыг арилгаж, цусны эргэлтийг сайжруулах.</div>
+    </div>
+    <div class="card-bottom">
+      <div class="card-tags">
+        <span class="card-tag">Мөр</span>
+        <span class="card-tag">Хүзүү</span>
+        <span class="card-tag">Булчин</span>
+      </div>
+      <span class="card-duration">—</span>
+    </div>
+  </a>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AI ACADEMY</div>
+  <div class="footer-note">Мэргэжлийн сургалтын материал · Зөвхөн дотоод хэрэглээнд</div>
+  <div class="footer-line">© 2025</div>
+</footer>
+
+<script>
+  function filterCards(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.card').forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>
